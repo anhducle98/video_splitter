@@ -8,7 +8,7 @@ Input:
 Output: Several videos and text files
 
 Build:
-* $ cmake.
+* $ cmake .
 * $ make
 
 Usage:
