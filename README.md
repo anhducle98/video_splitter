@@ -12,6 +12,6 @@ Build:
 * $ make
 
 Usage:
-* $ ./video_splitter {video_file_name} {text_file_name}
+* $ ./video_splitter {video_file_name} {text_file_name} [name_start_index]
 * Press ENTER to start recording from the current frame
-* Press ENTER to stop recording 
+* Press ENTER again to stop recording 
