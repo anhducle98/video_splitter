@@ -9,8 +9,8 @@ using namespace cv;
 #include "non_blocking_input.h"
 
 int main(int argc, char **argv) {
-    if (argc != 3) {
-        cerr << "Usage: {executable_name} {video_file_name} {text_file_name}" << endl;
+    if (argc < 3) {
+        cerr << "Usage: {executable_name} {video_file_name} {text_file_name} [name_start_index]" << endl;
         return 1;
     }
 
@@ -20,7 +20,10 @@ int main(int argc, char **argv) {
     VideoCapture video_reader(video_file_name);
     TextCapture text_reader(text_file_name);
 
-    int output_count = 0;
+    int output_count = 1;
+    if (argc > 3) {
+        output_count = atoi(argv[3]);
+    }
     bool recording = false;
     VideoWriter video_writer;
     ofstream text_writer;
@@ -43,9 +46,9 @@ int main(int argc, char **argv) {
             if (key == 10) { //ENTER
                 recording ^= 1; //toggle state
                 if (recording) {
-                    ++output_count;
                     video_writer.open(to_string(output_count) + ".avi", CV_FOURCC('X', 'V', 'I', 'D'), 10, Size(frame.cols, frame.rows));
                     text_writer.open((to_string(output_count) + ".txt").c_str());
+                    ++output_count;
                 } else {
                     video_writer.release();
                     text_writer.close();
